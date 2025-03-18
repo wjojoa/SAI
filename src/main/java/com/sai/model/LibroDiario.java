@@ -17,37 +17,44 @@ public class LibroDiario {
 
     private String fecha;
     private String concepto;
-    private Float ingreso;
-    private Float egreso;
-    private Float saldo;
+    private Double ingreso;
+    private Double egreso;
+    private Double saldo;
 
 
     public LibroDiario() {
 
     }
 
-    public LibroDiario(String fecha, String concepto, Float ingreso, Float egreso, Float saldo) {
+    public LibroDiario(String fecha, String concepto, Double ingreso, Double egreso, Double saldo) {
 
         this.fecha = fecha;
         this.concepto = concepto;
         this.ingreso = ingreso;
         this.egreso = egreso;
         this.saldo = saldo;
-        actulizarSaldo();
+        actualizarSaldo();
     }
 
     private void actulizarSaldo() {
     }
 
-    public void actualizarSaldo() {
+    /*public void actualizarSaldo() {
         if (ingreso != null) {
             saldo += ingreso;
         }
         if (egreso != null) {
             saldo -= egreso;
         }
-    }
+    }*/
 
+    public void actualizarSaldo() {
+        if (saldo == null) {
+            saldo = 0.0; // Inicializa saldo si es null
+        }
+        saldo += (ingreso != null ? ingreso : 0.0);
+        saldo -= (egreso != null ? egreso : 0.0);
+    }
 
     public Integer getId() {
         return id;
@@ -73,29 +80,29 @@ public class LibroDiario {
         this.concepto = concepto;
     }
 
-    public Float getIngreso() {
+    public Double getIngreso() {
         return ingreso;
     }
 
-    public void setIngreso(Float ingreso) {
+    public void setIngreso(Double ingreso) {
         this.ingreso = ingreso;
-        actulizarSaldo();
+        actualizarSaldo();
     }
 
-    public Float getEgreso() {
+    public Double getEgreso() {
         return egreso;
     }
 
-    public void setEgreso(Float egreso) {
+    public void setEgreso(Double egreso) {
         this.egreso = egreso;
-        actulizarSaldo();
+        actualizarSaldo();
     }
 
-    public Float getSaldo() {
+    public Double getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(Float saldo) {
+    public void setSaldo(Double saldo) {
         this.saldo = saldo;
     }
 }
