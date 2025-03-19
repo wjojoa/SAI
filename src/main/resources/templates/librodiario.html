@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Libro Diario</title>
+    <link real="stylesheet" hreft="/css/Styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+       h1 {
+           text-align: center;
+           color: #333;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            margin-top: 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+<h1>Libro Diario</h1>
+<form th:action="@{/save}" method="post">
+    <label for="fecha">Fecha:</label>
+    <input type="date" id="fecha" name="fecha" required><br><br>
+
+    <label for="concepto">Concepto:</label>
+    <input type="text" id="concepto" name="concepto" required><br><br>
+
+    <label for="ingreso">Ingreso:</label>
+    <input type="number" id="ingreso" name="ingreso" step="0.01" optional><br><br>
+
+    <label for="egreso">Egreso:</label>
+    <input type="number" id="egreso" name="egreso" step="0.01" optional><br><br>
+
+    <label for="saldo">Saldo:</label>
+    <input type="number" id="saldo" name="saldo" step="0.01" optional><br><br>
+
+    <button type="submit">Guardar</button>
+</form>
+</body>
+</html>

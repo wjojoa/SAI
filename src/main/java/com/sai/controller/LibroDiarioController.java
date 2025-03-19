@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
 import java.util.Optional;
 
 @Controller
@@ -24,7 +25,7 @@ public class LibroDiarioController {
     public String showForm(Model model) {
         // Corregido el método addAttribute
         model.addAttribute("libroDiario", new LibroDiario());
-        return "index";  // Devuelve el nombre de la vista (index.html)
+        return "librodiario";  // Devuelve el nombre de la vista (librodiario.html)
     }
 
     @PostMapping("/save")
@@ -33,7 +34,7 @@ public class LibroDiarioController {
         System.out.print("Log Libro diario obj Request" + libroDiarioRequest);
         Optional<LibroDiario> diarioLastInserted = libroDiarioService.getLastInserted();
 
-        if(diarioLastInserted.isPresent()) {
+        if (diarioLastInserted.isPresent()) {
             //Lo comente como codigo guia para futuros desarrollos
             /*double saldo =  diarioLastInserted.get().getSaldo();
             libroDiarioRequest.setSaldo(libroDiarioRequest.getIngreso() != null ? saldo + libroDiarioRequest.getIngreso() : saldo - libroDiarioRequest.getEgreso());*/
@@ -47,7 +48,7 @@ public class LibroDiarioController {
         //diarioLastInserted.ifPresent(libroDiario -> libroDiarioRequest.actualizarSaldo(libroDiario.getSaldo(), libroDiarioRequest));
 
         libroDiarioService.save(libroDiarioRequest);
-        return "index";  // Redirige de vuelta al formulario
+        return "librodiario";  // Redirige de vuelta al formulario
     }
 
 }

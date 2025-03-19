@@ -33,7 +33,7 @@ public class LibroDiario {
         this.ingreso = ingreso;
         this.egreso = egreso;
         this.saldo = saldo;
-       /*actualizarSaldo();*/
+
     }
 
     private void actulizarSaldo() {

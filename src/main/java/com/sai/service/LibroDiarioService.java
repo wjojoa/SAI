@@ -17,14 +17,16 @@ public class LibroDiarioService {
     public LibroDiarioService(LibroDiarioRepository libroDiarioRepository) {
         this.libroDiarioRepository = libroDiarioRepository;
     }
-    public List<LibroDiario> getAllEntries(){
+
+    public List<LibroDiario> getAllEntries() {
         return libroDiarioRepository.findAll();
     }
-    public void save(LibroDiario libroDiario){
+
+    public void save(LibroDiario libroDiario) {
         libroDiarioRepository.save(libroDiario);
     }
 
-    public Optional<LibroDiario> getLastInserted(){
-        return  libroDiarioRepository.findTopByOrderByIdDesc();
+    public Optional<LibroDiario> getLastInserted() {
+        return libroDiarioRepository.findTopByOrderByIdDesc();
     }
 }
