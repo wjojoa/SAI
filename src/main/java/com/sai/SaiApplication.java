@@ -1,11 +1,8 @@
 package com.sai;
 
-import com.sai.model.LibroDiario;
-import com.sai.repository.LibroDiarioCrudRepository;
+import com.sai.repository.LibroDiarioRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.util.List;
 
 @SpringBootApplication
 public class SaiApplication {
@@ -15,6 +12,6 @@ public class SaiApplication {
 	}
 
 	public static class LibroDiario {
-		private LibroDiarioCrudRepository libroDiarioCrudRepository;
+		private LibroDiarioRepository libroDiarioRepository;
 	}
 }

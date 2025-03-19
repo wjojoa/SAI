@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import java.util.Optional;
 
 @Controller
 public class LibroDiarioController {
@@ -27,13 +28,25 @@ public class LibroDiarioController {
     }
 
     @PostMapping("/save")
-    public String saveEntry(@ModelAttribute LibroDiario libroDiario) {
+    public String saveEntry(@ModelAttribute LibroDiario libroDiarioRequest) {
         // Guarda la entrada usando el servicio
-        System.out.println("librodiario" + libroDiario);
-        LibroDiario libroDiario1 = libroDiarioService.getLibroDiario(18);
-  libroDiario1.setSaldo(libroDiario.getIngreso());
-        libroDiario.setIngreso(libroDiario.getIngreso());
-        libroDiarioService.saveEntry(libroDiario1);
+        System.out.print("Log Libro diario obj Request" + libroDiarioRequest);
+        Optional<LibroDiario> diarioLastInserted = libroDiarioService.getLastInserted();
+
+        if(diarioLastInserted.isPresent()) {
+            //Lo comente como codigo guia para futuros desarrollos
+            /*double saldo =  diarioLastInserted.get().getSaldo();
+            libroDiarioRequest.setSaldo(libroDiarioRequest.getIngreso() != null ? saldo + libroDiarioRequest.getIngreso() : saldo - libroDiarioRequest.getEgreso());*/
+
+            libroDiarioRequest.actualizarSaldo(diarioLastInserted.get().getSaldo(), libroDiarioRequest);
+        } else {
+            libroDiarioRequest.setSaldo(libroDiarioRequest.getIngreso()); //2000
+        }
+
+        //Lo comente como codigo guia para futuros desarrollos
+        //diarioLastInserted.ifPresent(libroDiario -> libroDiarioRequest.actualizarSaldo(libroDiario.getSaldo(), libroDiarioRequest));
+
+        libroDiarioService.save(libroDiarioRequest);
         return "index";  // Redirige de vuelta al formulario
     }
 

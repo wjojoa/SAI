@@ -1,29 +1,30 @@
 package com.sai.service;
 
 import com.sai.model.LibroDiario;
-import com.sai.repository.LibroDiarioCrudRepository;
+import com.sai.repository.LibroDiarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LibroDiarioService {
 
-    private final LibroDiarioCrudRepository libroDiarioCrudRepository;
+    private final LibroDiarioRepository libroDiarioRepository;
 
     @Autowired
-    public LibroDiarioService(LibroDiarioCrudRepository libroDiarioCrudRepository) {
-        this.libroDiarioCrudRepository = libroDiarioCrudRepository;
+    public LibroDiarioService(LibroDiarioRepository libroDiarioRepository) {
+        this.libroDiarioRepository = libroDiarioRepository;
     }
     public List<LibroDiario> getAllEntries(){
-        return (List<LibroDiario>) (List<LibroDiario>) libroDiarioCrudRepository.findAll();
+        return libroDiarioRepository.findAll();
     }
-    public void saveEntry(LibroDiario libroDiario){
-        libroDiarioCrudRepository.save(libroDiario);
+    public void save(LibroDiario libroDiario){
+        libroDiarioRepository.save(libroDiario);
     }
 
-    public LibroDiario getLibroDiario(int id){
-        return (LibroDiario) libroDiarioCrudRepository.findById(id);
+    public Optional<LibroDiario> getLastInserted(){
+        return  libroDiarioRepository.findTopByOrderByIdDesc();
     }
 }

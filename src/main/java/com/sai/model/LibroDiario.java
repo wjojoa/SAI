@@ -40,12 +40,11 @@ public class LibroDiario {
     }
 
 
-    public void actualizarSaldo(Double valor) {
-        if (saldo == null) {
-            saldo = 0.0;
-        }
-        saldo += (valor != null ? valor : 0.0);
-        saldo -= (valor != null ? valor : 0.0);
+    public LibroDiario actualizarSaldo(Double saldo , LibroDiario libroDiarioRequest) {
+      libroDiarioRequest.setSaldo(libroDiarioRequest.getIngreso() != null
+              ? saldo + libroDiarioRequest.getIngreso()
+              : saldo - libroDiarioRequest.getEgreso()); //puede quedar saldo negativo - hay que hacer validacion
+      return libroDiarioRequest;
     }
 
     public Integer getId() {
