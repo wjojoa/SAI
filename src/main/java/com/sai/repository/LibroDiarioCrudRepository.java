@@ -9,6 +9,6 @@ import java.util.List;
 /*LibroDiario es la clase y Integer tipo de dato PK*/
 @Repository
 public interface LibroDiarioCrudRepository extends CrudRepository<LibroDiario, Integer> {
-    List<LibroDiario> findById(int id);
+    LibroDiario findById(int id);
 }
 

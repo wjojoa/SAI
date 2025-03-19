@@ -29,8 +29,13 @@ public class LibroDiarioController {
     @PostMapping("/save")
     public String saveEntry(@ModelAttribute LibroDiario libroDiario) {
         // Guarda la entrada usando el servicio
-        libroDiarioService.saveEntry(libroDiario);
-        return "wilmer";  // Redirige de vuelta al formulario
+        System.out.println("librodiario" + libroDiario);
+        LibroDiario libroDiario1 = libroDiarioService.getLibroDiario(18);
+  libroDiario1.setSaldo(libroDiario.getIngreso());
+        libroDiario.setIngreso(libroDiario.getIngreso());
+        libroDiarioService.saveEntry(libroDiario1);
+        return "index";  // Redirige de vuelta al formulario
     }
+
 }
 

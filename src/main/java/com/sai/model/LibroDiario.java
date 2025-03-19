@@ -33,27 +33,19 @@ public class LibroDiario {
         this.ingreso = ingreso;
         this.egreso = egreso;
         this.saldo = saldo;
-        actualizarSaldo();
+       /*actualizarSaldo();*/
     }
 
     private void actulizarSaldo() {
     }
 
-    /*public void actualizarSaldo() {
-        if (ingreso != null) {
-            saldo += ingreso;
-        }
-        if (egreso != null) {
-            saldo -= egreso;
-        }
-    }*/
 
-    public void actualizarSaldo() {
+    public void actualizarSaldo(Double valor) {
         if (saldo == null) {
-            saldo = 0.0; // Inicializa saldo si es null
+            saldo = 0.0;
         }
-        saldo += (ingreso != null ? ingreso : 0.0);
-        saldo -= (egreso != null ? egreso : 0.0);
+        saldo += (valor != null ? valor : 0.0);
+        saldo -= (valor != null ? valor : 0.0);
     }
 
     public Integer getId() {
@@ -86,7 +78,7 @@ public class LibroDiario {
 
     public void setIngreso(Double ingreso) {
         this.ingreso = ingreso;
-        actualizarSaldo();
+//        actualizarSaldo();
     }
 
     public Double getEgreso() {
@@ -95,7 +87,7 @@ public class LibroDiario {
 
     public void setEgreso(Double egreso) {
         this.egreso = egreso;
-        actualizarSaldo();
+//        actualizarSaldo();
     }
 
     public Double getSaldo() {
@@ -104,5 +96,17 @@ public class LibroDiario {
 
     public void setSaldo(Double saldo) {
         this.saldo = saldo;
+    }
+
+    @Override
+    public String toString() {
+        return "LibroDiario{" +
+                "id=" + id +
+                ", fecha='" + fecha + '\'' +
+                ", concepto='" + concepto + '\'' +
+                ", ingreso=" + ingreso +
+                ", egreso=" + egreso +
+                ", saldo=" + saldo +
+                '}';
     }
 }

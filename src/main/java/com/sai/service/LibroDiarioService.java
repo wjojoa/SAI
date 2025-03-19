@@ -22,4 +22,8 @@ public class LibroDiarioService {
     public void saveEntry(LibroDiario libroDiario){
         libroDiarioCrudRepository.save(libroDiario);
     }
+
+    public LibroDiario getLibroDiario(int id){
+        return (LibroDiario) libroDiarioCrudRepository.findById(id);
+    }
 }
