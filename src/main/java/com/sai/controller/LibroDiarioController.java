@@ -1,5 +1,7 @@
 package com.sai.controller;
 
+import com.sai.dto.LibroDiarioRequest;
+import com.sai.mapper.LibroDiarioMapper;
 import com.sai.model.LibroDiario;
 import com.sai.service.LibroDiarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +17,12 @@ import java.util.Optional;
 public class LibroDiarioController {
 
     private final LibroDiarioService libroDiarioService;
+    private final LibroDiarioMapper libroDiarioMapper;
 
     @Autowired
-    public LibroDiarioController(LibroDiarioService libroDiarioService) {
+    public LibroDiarioController(LibroDiarioService libroDiarioService, LibroDiarioMapper libroDiarioMapper) {
         this.libroDiarioService = libroDiarioService;
+        this.libroDiarioMapper = libroDiarioMapper;
     }
 
     @GetMapping("/")
@@ -29,8 +33,13 @@ public class LibroDiarioController {
     }
 
     @PostMapping("/save")
-    public String saveEntry(@ModelAttribute LibroDiario libroDiarioRequest) {
+    public String saveEntry(@ModelAttribute LibroDiarioRequest libroDiarioRequest) {
         // Guarda la entrada usando el servicio
+
+        /*
+         We map the LibriDiarioRequest to entity to avoid play directly wit the Entity - We only should use it to persist in database
+         */
+        LibroDiario libroDiario = libroDiarioMapper.toEntity(libroDiarioRequest);
         System.out.print("Log Libro diario obj Request" + libroDiarioRequest);
         Optional<LibroDiario> diarioLastInserted = libroDiarioService.getLastInserted();
 
@@ -39,15 +48,15 @@ public class LibroDiarioController {
             /*double saldo =  diarioLastInserted.get().getSaldo();
             libroDiarioRequest.setSaldo(libroDiarioRequest.getIngreso() != null ? saldo + libroDiarioRequest.getIngreso() : saldo - libroDiarioRequest.getEgreso());*/
 
-            libroDiarioRequest.actualizarSaldo(diarioLastInserted.get().getSaldo(), libroDiarioRequest);
+            libroDiario.actualizarSaldo(diarioLastInserted.get().getSaldo(), libroDiario);
         } else {
-            libroDiarioRequest.setSaldo(libroDiarioRequest.getIngreso()); //2000
+            libroDiario.setSaldo(libroDiarioRequest.ingreso()); //2000
         }
 
         //Lo comente como codigo guia para futuros desarrollos
         //diarioLastInserted.ifPresent(libroDiario -> libroDiarioRequest.actualizarSaldo(libroDiario.getSaldo(), libroDiarioRequest));
 
-        libroDiarioService.save(libroDiarioRequest);
+        libroDiarioService.save(libroDiario);
         return "librodiario";  // Redirige de vuelta al formulario
     }
 

@@ -27,7 +27,6 @@ public class LibroDiario {
     }
 
     public LibroDiario(String fecha, String concepto, Double ingreso, Double egreso, Double saldo) {
-
         this.fecha = fecha;
         this.concepto = concepto;
         this.ingreso = ingreso;
@@ -35,10 +34,6 @@ public class LibroDiario {
         this.saldo = saldo;
 
     }
-
-    private void actulizarSaldo() {
-    }
-
 
     public LibroDiario actualizarSaldo(Double saldo , LibroDiario libroDiarioRequest) {
       libroDiarioRequest.setSaldo(libroDiarioRequest.getIngreso() != null
