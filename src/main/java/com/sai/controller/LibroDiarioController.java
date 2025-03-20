@@ -16,8 +16,8 @@ import java.util.Optional;
 @Controller
 public class LibroDiarioController {
 
-    private final  LibroDiarioService libroDiarioService;
-    private final  LibroDiarioMapper libroDiarioMapper;
+    private final LibroDiarioService libroDiarioService;
+    private final LibroDiarioMapper libroDiarioMapper;
 
     @Autowired
     public LibroDiarioController(LibroDiarioService libroDiarioService, LibroDiarioMapper libroDiarioMapper) {
