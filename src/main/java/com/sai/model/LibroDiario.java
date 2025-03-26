@@ -37,9 +37,9 @@ public class LibroDiario {
 
     public LibroDiario actualizarSaldo(Double saldo , LibroDiario libroDiarioRequest) {
       libroDiarioRequest.setSaldo(libroDiarioRequest.getIngreso() != null
-              ? saldo + libroDiarioRequest.getIngreso()
-              : saldo - libroDiarioRequest.getEgreso()); //puede quedar saldo negativo - hay que hacer validacion
-      return libroDiarioRequest;
+                ? saldo + libroDiarioRequest.getIngreso()
+                : saldo - libroDiarioRequest.getEgreso()); //puede quedar saldo negativo - hay que hacer validacion
+        return libroDiarioRequest;
     }
 
     public Integer getId() {
